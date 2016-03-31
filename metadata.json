@@ -1,0 +1,21 @@
+{
+  "name": "justinjl-gitclone",
+  "version": "1.0.0",
+  "author": "justinjl",
+  "summary": "Install/update software from git repositories",
+  "license": "Apache 2.0",
+  "source": "https://github.com/justinjl6/puppet-gitclone",
+  "project_page": "https://github.com/justinjl6/puppet-gitclone",
+  "issues_url": "https://github.com/justinjl6/puppet-gitclone/issues",
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "operatingsystem_support": [
+    { "operatingsystem": "CentOS",      "operatingsystemrelease": [ "6", "7" ] },
+    { "operatingsystem": "CloudLinux",  "operatingsystemrelease": [ "6", "7" ] },
+    { "operatingsystem": "Debian",      "operatingsystemrelease": [ "7", "8" ] },
+    { "operatingsystem": "RedHat",      "operatingsystemrelease": [ "6", "7" ] },
+    { "operatingsystem": "Ubuntu",      "operatingsystemrelease": [ "12.04", "14.04", "16.04" ] }
+  ]
+}
+
