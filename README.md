@@ -2,7 +2,7 @@
 
 ## Overview
 
-Puppet module to clone git repositoroes.
+Puppet module to clone git repositories.
 
 ## Module Description
 
@@ -18,8 +18,6 @@ Can also periodically update (git pull) repositories at scheduled intervals.
 * Installs git via system package manager.
 * Optionally clones and updates git repositories when gitclone::repo type is
   called.
-
-### Setup Requirements **OPTIONAL**
 
 ### Beginning with gitclone
 
