@@ -79,12 +79,12 @@ define gitclone::repo (
 
     case $update {
         'hourly','daily','weekly','monthly':    {
-            schedule { 'gitclone::repository update' :
+            schedule { "gitclone::repository update - ${title}" :
                 period  => $update,
             }
         }
         'never',false:  {
-            schedule { 'gitclone::repository update' :
+            schedule { "gitclone::repository update - ${title}" :
                 period  => 'never',
             }
         }
@@ -102,32 +102,32 @@ define gitclone::repo (
 
         # Create parent directories
         $dirname = dirname($destination)
-        exec { 'gitclone::repository mkdir-parents' :
+        exec { "gitclone::repository mkdir-parents - ${title}" :
             command => "mkdir -p ${dirname}",
             path    => '/usr/bin:/bin',
             creates => $dirname,
         }
 
         # perform git clone
-        exec { 'gitclone::repository git-clone' :
+        exec { "gitclone::repository git-clone - ${title}" :
             command => "git clone ${git_args} ${depth_arg} --branch ${branch} ${source} ${destination}",
             path    => '/usr/bin:/bin',
             creates => "${destination}/.git",
-            notify  => Exec['gitclone::repository chown'],
+            notify  => Exec["gitclone::repository chown - ${title}"],
         }
 
         # perform git pull as per update schedule
-        exec { 'gitclone::repository git-pull' :
+        exec { "gitclone::repository git-pull - ${title}" :
             command  => "git pull ${git_args}",
             path     => '/usr/bin:/bin',
             cwd      => $destination,
             onlyif   => "test -d ${destination}/.git",
-            schedule => 'gitclone::repository update',
-            notify   => Exec['gitclone::repository chown'],
+            schedule => "gitclone::repository update - ${title}",
+            notify   => Exec["gitclone::repository chown - ${title}"],
         }
 
         # chown cloned/updated repository
-        exec { 'gitclone::repository chown' :
+        exec { "gitclone::repository chown - ${title}" :
             command     => "chown -R ${owner}:${group} ${destination}",
             path        => '/usr/bin:/bin',
             refreshonly => true,
